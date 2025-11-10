@@ -1,0 +1,26 @@
+<div class="filter">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    (input)="filter()"
+    placeholder="Filtrer par ville"
+  />
+  <button [routerLink]="['/pollution-form']">Ajouter une pollution</button>
+</div>
+
+<ul>
+  <li *ngFor="let p of filtered">
+    <div class="pollution-info">
+      <strong>{{ p.city }}</strong>
+      <span>Niveau : {{ p.level }}</span>
+      <span>Date : {{ p.date }}</span>
+    </div>
+    <div class="actions">
+      <a [routerLink]="['/pollutions', p.id]">Détail</a>
+      <a [routerLink]="['/pollution-form']" [queryParams]="{ id: p.id }"
+        >Modifier</a
+      >
+      <button class="delete" (click)="deletePollution(p.id!)">Supprimer</button>
+    </div>
+  </li>
+</ul>
